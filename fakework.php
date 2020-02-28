@@ -1,0 +1,313 @@
+<?php
+
+$colors = [
+    "\033[0;32m", //green
+    "\033[0;33m", //yellow
+    //"\033[0;31m", //red
+    "\033[0;34m", //blue
+    '',
+    '',
+    '',
+    '',
+    '',
+    '',
+    '',
+    '',
+    '',
+    '',
+    '',
+    ''
+];
+$colorOff = "\033[0m"; //color off :)
+
+//выводим всё фигню в цикле
+while(true) {
+    $random = rand(1, 10);
+
+    if ($random <= 7) {
+        drawStrings();
+    } else if ($random == 8) {
+        drawProgressBar();
+    } else if ($random == 9) {
+        drawReadingDataBase();
+    } else if ($random == 10) {
+        drawMemory();
+    }
+}
+
+/**
+ * Рисуем строку прогресса
+ */
+function drawProgressBar() {
+    global $colors;
+    global $colorOff;
+
+    echo "\n";
+    echo "\n";
+
+    $string = '[';
+    $dots = '...................................................................................................';
+    $count = rand(30, 100);
+    $pause = rand(10, 500);
+
+    $pauseArr = [
+        rand(10, 500),
+        rand(500000, 1000000)
+    ];
+
+    for ($i = 1; $i <= 100; $i++) {
+        echo "\r";
+        $string .= '#';
+        echo $string . $dots . '] ' . $colors[0] . $i . '%' . $colorOff;
+
+        $dots = substr($dots, 1);
+
+        $rand = rand(1, 100);
+        if ($rand <= 95) {
+            usleep($pauseArr[0]);
+        } else {
+            usleep($pauseArr[1]);
+        }
+    }
+    echo "\n";
+}
+
+/**
+ * Выводим цветные строки
+ */
+function drawStrings() {
+    global $colors;
+    global $colorOff;
+    $strings = [
+        '[1025345.950] (II) systemd-logind: logind integration requires -keeptty and -keeptty was not provided',
+        'SIGSEGV: [libjvm.so+0xe43bd0], sa_mask[0]=11111111011111111101111111111110, sa_flags=SA_RESTART|SA_SIGINFO',
+        'SIGBUS: [libjvm.so+0xe43bd0], sa_mask[0]=11111111011111111101111111111110, sa_flags=SA_RESTART|SA_SIGINFO',
+        'SIGFPE: [libjvm.so+0xe43bd0], sa_mask[0]=11111111011111111101111111111110, sa_flags=SA_RESTART|SA_SIGINFO',
+        'SIGPIPE: [libjvm.so+0xbf36c0], sa_mask[0]=11111111011111111101111111111110, sa_flags=SA_RESTART|SA_SIGINFO',
+        'SIGXFSZ: [libjvm.so+0xbf36c0], sa_mask[0]=11111111011111111101111111111110, sa_flags=SA_RESTART|SA_SIGINFO',
+        'SIGILL: [libjvm.so+0xe43bd0], sa_mask[0]=11111111011111111101111111111110, sa_flags=SA_RESTART|SA_SIGINFO',
+        'SIGUSR2: [libjvm.so+0xbf3560], sa_mask[0]=00100000000000000000000000000000, sa_flags=SA_RESTART|SA_SIGINFO',
+        'SIGHUP: SIG_DFL, sa_mask[0]=00000000000000000000000000000000, sa_flags=none',
+        'SIGINT: SIG_DFL, sa_mask[0]=00000000000000000000000000000000, sa_flags=none',
+        'SIGTERM: SIG_DFL, sa_mask[0]=00000000000000000000000000000000, sa_flags=none',
+        'SIGQUIT: SIG_DFL, sa_mask[0]=00000000000000000000000000000000, sa_flags=none',
+        '[1025345.958] (II) Loading /usr/lib/xorg/modules/drivers/fbdev_drv.so',
+        '[1025345.958] (II) Module fbdev: vendor="X.Org Foundation"',
+        '[1025345.958]   compiled for 1.19.3, module version = 0.4.4',
+        '[1025345.958]   Module class: X.Org Video Driver',
+        '[1025345.958]   ABI class: X.Org Video Driver, version 23.0',
+        '[1025345.958] (II) LoadModule: "vesa"',
+        '[1025345.958] (II) Loading /usr/lib/xorg/modules/drivers/vesa_drv.so',
+        '[1025345.958] (II) Module vesa: vendor="X.Org Foundation"',
+        '[1025345.958]   compiled for 1.19.3, module version = 2.3.4',
+        '[1025345.958]   Module class: X.Org Video Driver',
+        '[1025345.958]   ABI class: X.Org Video Driver, version 23.0',
+        '[1025345.958] (II) RADEON: Driver for ATI/AMD Radeon chipsets:',
+        'dbconfig-common: dropping mysql database phpmyadmin.',
+        'dropping database phpmyadmin: success.',
+        'verifying database phpmyadmin was dropped: success.',
+        'dbconfig-common: revoking privileges for user phpmyadmin on phpmyadmin.',
+        'revoking access to database phpmyadmin from phpmyadmin@localhost: success.',
+        'Determining localhost credentials from /etc/mysql/debian.cnf: succeeded.',
+        'Determining localhost credentials from /etc/mysql/debian.cnf: succeeded.',
+        'checking privileges on database phpmyadmin for phpmyadmin@localhost: user creation needed.',
+        'granting access to database phpmyadmin for phpmyadmin@localhost: success.',
+        'verifying access for phpmyadmin@localhost: success.',
+        '[1025346.553] (II) RADEON(0): Modeline "1920x1080"x60.0  148.50  1920 2008 2052 2200  1080 1084 1089 1125 +hsync +vsync (67.5 kHz eP)',
+        '[1025346.553] (II) RADEON(0): Modeline "1680x1050"x60.0  146.25  1680 1784 1960 2240  1050 1053 1059 1089 -hsync +vsync (65.3 kHz e)',
+        '[1025346.553] (II) RADEON(0): Modeline "1280x1024"x60.0  108.00  1280 1328 1440 1688  1024 1025 1028 1066 +hsync +vsync (64.0 kHz e)',
+        '[1025346.553] (II) RADEON(0): Modeline "1440x900"x59.9  106.50  1440 1520 1672 1904  900 903 909 934 -hsync +vsync (55.9 kHz e)',
+        '[1025346.553] (II) RADEON(0): Modeline "1280x800"x59.8   83.50  1280 1352 1480 1680  800 803 809 831 -hsync +vsync (49.7 kHz e)',
+        '[1025346.553] (II) RADEON(0): Modeline "1152x864"x75.0  108.00  1152 1216 1344 1600  864 865 868 900 +hsync +vsync (67.5 kHz e)',
+        '[1025346.553] (II) RADEON(0): Modeline "1280x720"x60.0   74.25  1280 1390 1430 1650  720 725 730 750 +hsync +vsync (45.0 kHz e)',
+        '[1025346.553] (II) RADEON(0): Modeline "1024x768"x70.1   75.00  1024 1048 1184 1328  768 771 777 806 -hsync -vsync (56.5 kHz e)',
+        '[1025346.553] (II) RADEON(0): Modeline "1024x768"x60.0   65.00  1024 1048 1184 1344  768 771 777 806 -hsync -vsync (48.4 kHz e)',
+        '[1025346.553] (II) RADEON(0): Modeline "800x600"x60.3   40.00  800 840 968 1056  600 601 605 628 +hsync +vsync (37.9 kHz e)',
+        '[1025346.553] (II) RADEON(0): Modeline "800x600"x56.2   36.00  800 824 896 1024  600 601 603 625 +hsync +vsync (35.2 kHz e)',
+        '[1025346.553] (II) RADEON(0): Modeline "640x480"x66.7   30.24  640 704 768 864  480 483 486 525 -hsync -vsync (35.0 kHz e)',
+        '[1025346.553] (II) RADEON(0): Modeline "640x480"x59.9   25.18  640 656 752 800  480 490 492 525 -hsync -vsync (31.5 kHz e)',
+        '[1025346.553] (II) RADEON(0): Modeline "720x400"x70.1   28.32  720 738 846 900  400 412 414 449 -hsync +vsync (31.5 kHz e)',
+        '[1025346.649] (II) event1  - Power Button: device is a keyboard',
+        '[1025346.649] (II) config/udev: Adding input device Power Button (/dev/input/event0)',
+        '[1025346.649] (**) Power Button: Applying InputClass "libinput keyboard catchall"',
+        '7ffae5bf8000-7ffae5bff000 r-xp 00000000 08:02 17961672                   /lib/x86_64-linux-gnu/librt-2.27.so',
+        '7ffae5bff000-7ffae5dfe000 ---p 00007000 08:02 17961672                   /lib/x86_64-linux-gnu/librt-2.27.so',
+        '7ffae5dfe000-7ffae5dff000 r--p 00006000 08:02 17961672                   /lib/x86_64-linux-gnu/librt-2.27.so',
+        '7ffae5dff000-7ffae5e00000 rw-p 00007000 08:02 17961672                   /lib/x86_64-linux-gnu/librt-2.27.so',
+        '7ffae5e00000-7ffae5f9d000 r-xp 00000000 08:02 17961595                   /lib/x86_64-linux-gnu/libm-2.27.so',
+        '7ffae5f9d000-7ffae619c000 ---p 0019d000 08:02 17961595                   /lib/x86_64-linux-gnu/libm-2.27.so',
+        '7ffae619c000-7ffae619d000 r--p 0019c000 08:02 17961595                   /lib/x86_64-linux-gnu/libm-2.27.so',
+        '7ffae619d000-7ffae619e000 rw-p 0019d000 08:02 17961595                   /lib/x86_64-linux-gnu/libm-2.27.so',
+        '[1025346.670] (II) This device may have been added with another device file.',
+        '[1025346.671] (II) config/udev: Adding input device PixArt Dell MS116 USB Optical Mouse (/dev/input/event12)',
+        '[1025346.671] (**) PixArt Dell MS116 USB Optical Mouse: Applying InputClass "libinput pointer catchall"',
+        '[1025346.671] (II) Using input driver libinput for PixArt Dell MS116 USB Optical Mouse',
+        '[1025346.671] (**) PixArt Dell MS116 USB Optical Mouse: always reports core events',
+        '[1025346.671] (**) Option "Device" "/dev/input/event12"',
+        '[1025346.671] (**) Option "_source" "server/udev"',
+        '[1025346.672] (II) event12 - PixArt Dell MS116 USB Optical Mouse: is tagged by udev as: Mouse',
+        '[1025346.672] (II) event12 - PixArt Dell MS116 USB Optical Mouse: device set to 1000 DPI',
+        '[1025346.672] (II) event12 - PixArt Dell MS116 USB Optical Mouse: device is a pointer',
+        '1025346.672] (II) event12 - PixArt Dell MS116 USB Optical Mouse: device removed',
+        'localhost - root [27/Feb/2020:00:09:32 +0300] "POST /admin/ HTTP/1.1" 200 201 CUPS-Add-Modify-Printer successful-ok',
+        'localhost - root [27/Feb/2020:00:09:32 +0300] "POST /admin/ HTTP/1.1" 200 201 CUPS-Add-Modify-Printer successful-ok',
+        'localhost - root [27/Feb/2020:00:09:32 +0300] "POST /admin/ HTTP/1.1" 200 8570 CUPS-Add-Modify-Printer successful-ok',
+        'localhost - root [27/Feb/2020:00:09:32 +0300] "POST /admin/ HTTP/1.1" 200 201 CUPS-Add-Modify-Printer successful-ok',
+        'localhost - root [27/Feb/2020:00:09:32 +0300] "POST /admin/ HTTP/1.1" 200 201 CUPS-Add-Modify-Printer successful-ok',
+        'localhost - root [27/Feb/2020:00:09:32 +0300] "POST /admin/ HTTP/1.1" 200 201 CUPS-Add-Modify-Printer successful-ok',
+        'localhost - root [27/Feb/2020:00:09:32 +0300] "POST /admin/ HTTP/1.1" 200 8570 CUPS-Add-Modify-Printer successful-ok',
+        'localhost - root [27/Feb/2020:00:09:32 +0300] "POST /admin/ HTTP/1.1" 200 201 CUPS-Add-Modify-Printer successful-ok',
+        'localhost - root [27/Feb/2020:00:19:00 +0300] "POST /admin/ HTTP/1.1" 200 177 CUPS-Delete-Printer successful-ok',
+        'localhost - root [27/Feb/2020:04:18:12 +0300] "POST /admin/ HTTP/1.1" 200 177 CUPS-Delete-Printer successful-ok',
+    ];
+
+    $stringsSum = rand(20, 20); // сколько строк будет в блоке
+
+    for ($i = 1; $i <= $stringsSum; $i++) {
+        echo "\n";
+        echo $colors[rand(0, (count($colors) - 1))] . $strings[rand(0, count($strings) - 1)] . $colorOff;
+
+        $pauseArr = [
+            rand(10, 500),
+            rand(750000, 1000000)
+        ];
+
+        $rand = rand(1, 10);
+        if ($rand <= 9) {
+            usleep($pauseArr[0]);
+        } else {
+            usleep($pauseArr[1]);
+        }
+    }
+
+    echo "\n";
+}
+
+/**
+ * Выводит чтение базы
+ */
+function drawReadingDataBase() {
+    global $colors;
+    global $colorOff;
+
+    $strings = [
+        "Reading database ... $colors[0]0%$colorOff",
+        "Reading database ... $colors[0]5%$colorOff",
+        "Reading database ... $colors[0]10%$colorOff",
+        "Reading database ... $colors[0]15%$colorOff",
+        "Reading database ... $colors[0]20%$colorOff",
+        "Reading database ... $colors[0]25%$colorOff",
+        "Reading database ... $colors[0]30%$colorOff",
+        "Reading database ... $colors[0]35%$colorOff",
+        "Reading database ... $colors[0]40%$colorOff",
+        "Reading database ... $colors[0]45%$colorOff",
+        "Reading database ... $colors[0]50%$colorOff",
+        "Reading database ... $colors[0]55%$colorOff",
+        "Reading database ... $colors[0]60%$colorOff",
+        "Reading database ... $colors[0]65%$colorOff",
+        "Reading database ... $colors[0]70%$colorOff",
+        "Reading database ... $colors[0]75%$colorOff",
+        "Reading database ... $colors[0]80%$colorOff",
+        "Reading database ... $colors[0]85%$colorOff",
+        "Reading database ... $colors[0]90%$colorOff",
+        "Reading database ... $colors[0]95%$colorOff",
+        "Reading database ... $colors[0]100%$colorOff",
+    ];
+
+    foreach ($strings as $v) {
+        echo "\n";
+        echo $v;
+
+        $pauseArr = [
+            rand(10, 500),
+            rand(750000, 1000000)
+        ];
+
+        $rand = rand(1, 10);
+        if ($rand <= 7) {
+            usleep($pauseArr[0]);
+        } else {
+            usleep($pauseArr[1]);
+        }
+    }
+
+    echo "\n";
+}
+
+/**
+ * Выводит чтение памяти
+ */
+function drawMemory() {
+    global $colors;
+    global $colorOff;
+
+    $strings = [
+        "MemTotal:       " . $colors[rand(0, (count($colors) - 1))] . "12119388 kB" . $colorOff,
+        "MemFree:          " . $colors[rand(0, (count($colors) - 1))] . "147476 kB" . $colorOff,
+        "MemAvailable:     " . $colors[rand(0, (count($colors) - 1))] . "505816 kB" . $colorOff,
+        "Buffers:           " . $colors[rand(0, (count($colors) - 1))] . "41988 kB" . $colorOff,
+        "Cached:           " . $colors[rand(0, (count($colors) - 1))] . "487032 kB" . $colorOff,
+        "SwapCached:        " . $colors[rand(0, (count($colors) - 1))] . "15044 kB" . $colorOff,
+        "Active:         " . $colors[rand(0, (count($colors) - 1))] . "10380976 kB" . $colorOff,
+        "Inactive:        " . $colors[rand(0, (count($colors) - 1))] . "1270540 kB" . $colorOff,
+        "Active(anon):   " . $colors[rand(0, (count($colors) - 1))] . "10120352 kB" . $colorOff,
+        "Inactive(anon):  " . $colors[rand(0, (count($colors) - 1))] . "1006200 kB" . $colorOff,
+        "Active(file):     " . $colors[rand(0, (count($colors) - 1))] . "260624 kB" . $colorOff,
+        "Inactive(file):   " . $colors[rand(0, (count($colors) - 1))] . "264340 kB" . $colorOff,
+        "Unevictable:          " . $colors[rand(0, (count($colors) - 1))] . "32 kB" . $colorOff,
+        "Mlocked:              " . $colors[rand(0, (count($colors) - 1))] . "32 kB" . $colorOff,
+        "SwapTotal:       " . $colors[rand(0, (count($colors) - 1))] . "2097148 kB" . $colorOff,
+        "SwapFree:        " . $colors[rand(0, (count($colors) - 1))] . "1575948 kB" . $colorOff,
+        "Dirty:               " . $colors[rand(0, (count($colors) - 1))] . "356 kB" . $colorOff,
+        "Writeback:             " . $colors[rand(0, (count($colors) - 1))] . "0 kB" . $colorOff,
+        "AnonPages:      " . $colors[rand(0, (count($colors) - 1))] . "11107896 kB" . $colorOff,
+        "Mapped:            " . $colors[rand(0, (count($colors) - 1))] . "91360 kB" . $colorOff,
+        "Shmem:              " . $colors[rand(0, (count($colors) - 1))] . "4052 kB" . $colorOff,
+        "Slab:             " . $colors[rand(0, (count($colors) - 1))] . "177860 kB" . $colorOff,
+        "SReclaimable:     " . $colors[rand(0, (count($colors) - 1))] . "136072 kB" . $colorOff,
+        "SUnreclaim:        " . $colors[rand(0, (count($colors) - 1))] . "41788 kB" . $colorOff,
+        "KernelStack:        " . $colors[rand(0, (count($colors) - 1))] . "7536 kB" . $colorOff,
+        "PageTables:        " . $colors[rand(0, (count($colors) - 1))] . "52008 kB" . $colorOff,
+        "NFS_Unstable:          " . $colors[rand(0, (count($colors) - 1))] . "0 kB" . $colorOff,
+        "Bounce:                " . $colors[rand(0, (count($colors) - 1))] . "0 kB" . $colorOff,
+        "WritebackTmp:          " . $colors[rand(0, (count($colors) - 1))] . "0 kB" . $colorOff,
+        "CommitLimit:     " . $colors[rand(0, (count($colors) - 1))] . "8156840 kB" . $colorOff,
+        "Committed_AS:   " . $colors[rand(0, (count($colors) - 1))] . "15504200 kB" . $colorOff,
+        "VmallocTotal:   " . $colors[rand(0, (count($colors) - 1))] . "34359738367 kB" . $colorOff,
+        "VmallocUsed:           " . $colors[rand(0, (count($colors) - 1))] . "0 kB" . $colorOff,
+        "VmallocChunk:          " . $colors[rand(0, (count($colors) - 1))] . "0 kB" . $colorOff,
+        "HardwareCorrupted:     " . $colors[rand(0, (count($colors) - 1))] . "0 kB" . $colorOff,
+        "AnonHugePages:         " . $colors[rand(0, (count($colors) - 1))] . "0 kB" . $colorOff,
+        "ShmemHugePages:        " . $colors[rand(0, (count($colors) - 1))] . "0 kB" . $colorOff,
+        "ShmemPmdMapped:        " . $colors[rand(0, (count($colors) - 1))] . "0 kB" . $colorOff,
+        "HugePages_Surp:        " . $colors[rand(0, (count($colors) - 1))] . "0" . $colorOff,
+        "Hugepagesize:       " . $colors[rand(0, (count($colors) - 1))] . "2048 kB" . $colorOff,
+        "DirectMap4k:      " . $colors[rand(0, (count($colors) - 1))] . "213164 kB" . $colorOff,
+        "DirectMap2M:    " . $colors[rand(0, (count($colors) - 1))] . "10092544 kB" . $colorOff,
+        "CmaTotal:              " . $colors[rand(0, (count($colors) - 1))] . "0 kB" . $colorOff,
+        "CmaFree:               " . $colors[rand(0, (count($colors) - 1))] . "0 kB" . $colorOff,
+        "HugePages_Total:       " . $colors[rand(0, (count($colors) - 1))] . "0" . $colorOff,
+        "HugePages_Free:        " . $colors[rand(0, (count($colors) - 1))] . "0" . $colorOff,
+        "HugePages_Rsvd:        " . $colors[rand(0, (count($colors) - 1))] . "0" . $colorOff,
+        "DirectMap1G:     " . $colors[rand(0, (count($colors) - 1))] . "3145728 kB" . $colorOff,
+    ];
+
+    foreach ($strings as $v) {
+        echo "\n";
+        echo $v;
+
+        $pauseArr = [
+            rand(10, 500),
+            rand(750000, 1000000)
+        ];
+
+        $rand = rand(1, 10);
+        if ($rand <= 7) {
+            usleep($pauseArr[0]);
+        } else {
+            usleep($pauseArr[1]);
+        }
+    }
+
+    echo "\n";
+}
